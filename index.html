@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css" />
+    <style>
+        .MinCost{
+            font-size: 110%;
+            font-weight: bold;
+        }
+    </style>
+    
+    
+    
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="/node_modules/angular-aria/angular-aria.js"></script>
+    <script src="/node_modules/angular-resource/angular-resource.js"></script>
+    <script src="/node_modules/angular-route/angular-route.js"></script>
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+    <script src="/app/app.module.js"></script>
+    <script src="/app/app.config.js"></script>  
+    <script src="/app/core/core.module.js"></script>
+   
+    <script src="/app/core/establishment/establishment.module.js"></script>
+    <script src="/app/core/establishment/establishment.service.js"></script>
+    <script src="/app/establishment-list/establishment-list.module.js"></script>
+    <script src="/app/establishment-list/establishment-list.component.js"></script>
+    <script src="/app/establishment-detail/establishment-detail.module.js"></script>
+    <script src="/app/establishment-detail/establishment-detail.component.js"></script>
+  </head>
+  <body>
+
+    <div ng-app="establishmentApp" ng-cloak>
+      <div ng-view class="view-frame"></div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "tr-client",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "repository": "https://github.com/adam-bubela/tr-client.git",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+   
+  },
+  "scripts": {},
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-animate": "^1.6.2",
+    "angular-aria": "^1.6.2",
+    "angular-material": "^1.1.3",
+    "angular-resource": "^1.6.2",
+    "angular-route": "^1.6.2"
+  }
+}

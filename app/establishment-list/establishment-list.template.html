@@ -1,0 +1,125 @@
+<form name="filterForm">
+<div layout="column" ng-cloak>
+  
+    <md-content layout-padding>
+    
+        <div layout="row">   
+        
+              <md-input-container class="md-block" flex="90">
+                <label>Search</label>
+                <input ng-model="$ctrl.Name"> 
+              </md-input-container>
+              
+            <md-button class="md-block" ng-show="$ctrl.Name.length>2"  flex-lg="10" type="submit" ng-click="querySearchHotel()">
+            	<span>search</span>
+            	<div ng-show="$ctrl.searching">  
+		        	<md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        		</div> 
+            </md-button>
+        </div>
+         
+        <md-whiteframe ng-show="$ctrl.noRecords" class="md-whiteframe-1dp" flex layout layout-align="center center">
+            <span>No hotels found</span>
+        </md-whiteframe>
+        <div ng-show="$ctrl.Name.length>2">
+            <h3>Advanced</h3>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Stars</label>
+                <md-select ng-model="$ctrl.Stars" multiple ng-change="querySearchHotel()">
+                    <md-option ng-value="i" ng-repeat="i in $init.stars">{{i}} star{{i>1?'s':''}}</md-option>
+                </md-select>
+           </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Price</label>
+                <md-select ng-model="$ctrl.MinCost" multiple ng-change="querySearchHotel()">
+                    <md-option ng-value="i" ng-repeat="i in $init.priceRanges">{{ i[0] }} - {{ i[1] }}</md-option>
+                </md-select>
+            </md-input-container>    
+             <div>
+                <p>Rating {{$ctrl.UserRating}}</p>
+                <md-slider-container>       
+                    <span>0</span>
+                    <md-slider flex min="0" max="10" step=".5" md-discrete ng-model="$ctrl.UserRating" aria-label="Rating" ng-change="querySearchHotel()"></md-slider>
+                    <span>10</span>    
+                </md-slider-container>
+            </div>
+            <div>  
+                <p>TRP</p>
+                <md-radio-group ng-model="$ctrl.TrpRating"  ng-change="querySearchHotel()">
+                    <md-radio-button  
+                       ng-value="i"
+                       aria-label="{{i}}" 
+                       ng-repeat="i in $init.userRatingCountMax"> &gt; {{i}}</md-radio-button>
+                </md-radio-group> 
+            </div>
+        </div>
+    
+      </md-content>
+    
+
+            
+
+</div>
+
+
+
+<div ng-show="establishments.total">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <h3>{{establishments.total}} {{establishments.total==1 ? 'property':'properties'}} found</h3>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+        
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Sort</label>
+        <md-select ng-model="$ctrl.orderBy" ng-change="querySearchHotel()">
+           <md-option value='["Distance",false]'>Distance Asc</md-option>
+           <md-option value='["Distance",true]'>Distance Desc</md-option>
+           <md-option value='["Stars",false]'>Stars Asc</md-option>
+           <md-option value='["Stars",true]'>Stars Desc</md-option>
+           <md-option value='["MinCost",false]'>Min Cost Asc</md-option>
+           <md-option value='["MinCost",true]'>Min Cost Desc</md-option>
+           <md-option value='["TrpRating",false]'>Trp Rating Asc</md-option>
+           <md-option value='["TrpRating",true]'>Trp Rating Desc</md-option>
+           <md-option value='["UserRating",false]'>User Rating Asc</md-option>
+           <md-option value='["UserRating",true]'>User Rating Desc</md-option>
+         </md-select>
+      </md-input-container> 
+    <md-content>
+    </div>   
+
+    <md-card ng-repeat="item in establishments.data">
+        <md-card-title>
+          <md-card-title-text>
+            <div>
+                <span class="md-headline">{{ item.Stars }}<i class="material-icons">&#xE83A;</i> {{ item.Name }}</span>
+                
+                <div class="md-subhead"><b>{{ item.Location }}</b> just {{ item.Distance | number : 1 }} miles from you</div>
+            </div>
+
+            <md-card-content layout="row">
+               <md-chips>
+                    <md-chip>{{item.UserRatingTitle}} {{item.UserRating | number : 1}}</md-chip>
+                    <md-chip ng-show="item.UserRatingCount">{{item.UserRatingCount}} reviews</md-chip>
+               </md-chips>
+            </md-card-content>
+          </md-card-title-text>
+          <md-card-title-media>
+              <div class="md-media-lg card-media">
+                  <img class="md-card-image" ng-src="{{item.ImageUrl}}" alt="{{item.Name}}">
+              </div>
+          </md-card-title-media>
+
+        </md-card-title>
+        
+        <md-card-actions layout="row" layout-padding layout-align="end center">
+            <span class="MinCost">only &pound;{{item.MinCost}}</span>
+            <span flex></span>
+            <md-button class="md-raised md-primary">book now</md-button>
+        </md-card-actions>
+    </md-card>
+
+</form>
+
